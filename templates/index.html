@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔥 Roast My Resume!</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='comic.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="comic-body">
+
+  <div class="comic-container">
+    <h1>🔥 Roast My Resume!</h1>
+    <p class="comic-subtitle">Upload your resume and continue!!!!!</p>
+
+    <form action="/roast" method="post" enctype="multipart/form-data" class="form-grid">
+
+      <!-- Resume Upload -->
+      <div class="form-group">
+        <label for="resume">📄 Upload Resume:</label>
+        <div class="file-upload-wrapper">
+          <label for="resume" class="custom-file-label">📎 Choose File</label>
+          <span id="file-name">No file chosen</span>
+          <input type="file" name="resume" id="resume" accept=".pdf, .docx" required>
+        </div>
+      </div>
+
+
+      <!-- Roast Persona -->
+      <div class="form-group">
+        <label for="persona">🧑 Roast it like:</label>
+        <select name="persona" id="persona" required>
+          <option value="comedian">🎤 A Comedian</option>
+          <option value="grandma">👵 Your Grandma</option>
+          <option value="roommate">🧍‍♂️ Your Roommate</option>
+          <option value="teacher">🍎 A High School Teacher</option>
+        </select>
+      </div>
+
+      <!-- Roast Level -->
+      <div class="form-group">
+        <label for="intensity">🌶️ Roast Level:</label>
+        <select name="intensity" id="intensity" required>
+          <option value="mild">🧂 Mild</option>
+          <option value="medium">🔥 Medium</option>
+          <option value="hot">🌶️ Hot</option>
+          <option value="nuclear">☢️ Nuclear</option>
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit">💣 Roast Me Now!</button>
+      <div id="loading-indicator" style="display: none; margin-top: 1rem; text-align: center;">
+        <div class="comic-loader"></div>
+        <p style="margin-top: 0.5rem; font-weight: bold;">Cooking up your roast...</p>
+      </div>
+
+    </form>
+  </div>
+
+  <script>
+    const fileInput = document.getElementById('resume');
+    const fileName = document.getElementById('file-name');
+    fileInput.addEventListener('change', function () {
+      fileName.textContent = this.files[0]?.name || "No file chosen";
+    });
+
+    const form = document.querySelector("form");
+    const loader = document.getElementById("loading-indicator");
+    const button = form.querySelector("button");
+
+    form.addEventListener("submit", function () {
+        loader.style.display = "block";
+        button.disabled = true;
+        button.textContent = "Roasting...";
+    });
+  </script>
+
+</body>
+</html>

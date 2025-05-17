@@ -1,0 +1,238 @@
+/* =============================
+   Comic Roast My Resume Theme
+   ============================= */
+body.comic-body {
+  transform: scale(0.85);
+  transform-origin: center;
+}
+
+body.comic-body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle, #ffe88b, #ffc800);
+  font-family: 'Comic Neue', cursive;
+  color: #111;
+}
+
+.comic-container {
+  max-width: 600px;
+  margin: auto;
+  background: white;
+  border: 4px solid #000;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 10px 10px 0px #000;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #d00000;
+  text-align: center;
+  text-shadow: 2px 2px #fff;
+  margin: 0%;
+}
+
+.comic-subtitle {
+  text-align: center;
+  font-size: 1.1rem;
+  margin: 1rem;
+}
+
+/* =============================
+   Form Layout & Alignment
+   ============================= */
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+}
+
+/* =============================
+   File Upload Styling
+   ============================= */
+
+.file-upload-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 100%;
+  background: #fefefe;
+  border: 3px solid #000;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  box-shadow: 4px 4px 0px #000;
+  overflow: hidden;
+}
+
+
+.custom-file-label {
+  background: #ff3c38;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: 2px solid #000;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #000;
+  transition: background 0.2s ease;
+}
+
+.custom-file-label:hover {
+  background: #d60000;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+#file-name {
+  font-size: 0.9rem;
+  color: #222;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 65%;
+}
+
+
+/* =============================
+   Dropdown Styling
+   ============================= */
+
+select {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 1rem;
+  border: 3px solid #000;
+  border-radius: 8px;
+  background: #fefefe;
+  box-shadow: 4px 4px 0px #000;
+}
+
+/* =============================
+   Submit Button
+   ============================= */
+
+button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background: #ff3c38;
+  border: 3px solid #000;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 5px 5px 0px #000;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #d60000;
+}
+
+/* =============================
+   Roast Output Styling
+   ============================= */
+
+body.result-container {
+  transform: scale(0.80);
+  transform-origin: center;
+}
+.result-container {
+  max-width: 650px;
+  max-height: 80%;
+  margin: auto;
+  background: white;
+  border: 4px solid #000;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 10px 10px 0px #000;
+}
+/* Roast box scroll handling */
+.speech-bubble {
+  position: relative;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 15px;
+  padding: 0 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  box-shadow: 6px 6px 0px #000;
+  margin-top: 2rem;
+  max-height: 500px;          
+  overflow-y: auto;         
+}
+
+.roast-content {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+
+
+
+.speech-bubble::-webkit-scrollbar {
+  width: 6px;
+}
+.speech-bubble::-webkit-scrollbar-thumb {
+  background: #ff3c38;
+  border-radius: 10px;
+}
+/* =============================
+   Back Link
+   ============================= */
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 2rem;
+  padding: 0.8rem 1rem;
+  background: #ff3c38;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  border: 3px solid #000;
+  border-radius: 10px;
+  box-shadow: 4px 4px 0px #000;
+  transition: background 0.2s ease;
+}
+
+.back-link:hover {
+  background: #d60000;
+}
+
+.comic-loader {
+  width: 40px;
+  height: 40px;
+  border: 5px solid #000;
+  border-top: 5px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+

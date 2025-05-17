@@ -1,0 +1,22 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔥 Your Roast is Ready!</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='comic.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body class="comic-body">
+  <div class="result-container">
+    <h1>💥 Boom! Roasted!</h1>
+
+    <div class="speech-bubble">
+        <pre class="roast-content">{{ roast | safe }}</pre>
+    </div>
+
+
+    <a class="back-link" href="/">⬅️ Roast Another Resume</a>
+  </div>
+</body>
+</html>
