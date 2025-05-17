@@ -3,6 +3,17 @@ import os
 import fitz  # PyMuPDF
 import google.generativeai as genai
 from dotenv import load_dotenv
+import firebase_admin
+from firebase_admin import credentials, firestore
+
+# Initialize only once
+if not firebase_admin._apps:
+    cred = credentials.Certificate("firebase-key.json")
+    firebase_admin.initialize_app(cred)
+
+db = firestore.client()
+
+
 
 # Load environment variables
 load_dotenv()
@@ -146,6 +157,14 @@ def roast():
 
         roast_text = response.text
         roast_text = markdown_to_html(response.text)
+
+        doc_ref = db.collection("roasts").add({
+            "resume_text": resume_text,
+            "prompt": prompt,
+            "roast": roast_text,
+            "timestamp": firestore.SERVER_TIMESTAMP
+        })
+
     except Exception as e:
         roast_text = f"⚠️ Error generating roast: {e}"
 
