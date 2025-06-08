@@ -3,23 +3,21 @@ import os
 import fitz  # PyMuPDF
 import google.generativeai as genai
 from dotenv import load_dotenv
-import firebase_admin
-from firebase_admin import credentials, firestore
+# import firebase_admin
+# from firebase_admin import credentials, firestore
+from gemini_helper import get_roast
 
-# Initialize only once
-if not firebase_admin._apps:
-    cred = credentials.Certificate("firebase-key.json")
-    firebase_admin.initialize_app(cred)
-
-db = firestore.client()
-
-
-
-# Load environment variables
+# Load env and configure Gemini FIRST
+from dotenv import load_dotenv
 load_dotenv()
-
-# Configure Gemini
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+
+# if not firebase_admin._apps:
+#     cred = credentials.Certificate("firebase-key.json")
+#     firebase_admin.initialize_app(cred)
+
+# db = firestore.client()
+
 
 app = Flask(__name__)
 
@@ -145,25 +143,16 @@ def roast():
         # Build and send prompt
         prompt = build_roast_prompt(resume_text, persona, intensity)
         print(prompt)
-        model = genai.GenerativeModel("models/gemini-2.0-flash")
-        response = model.generate_content(
-            prompt,
-            generation_config=genai.types.GenerationConfig(
-                temperature=0.9,
-                top_p=0.95,
-                max_output_tokens=1200
-            )
-        )
+        roast_raw = get_roast(prompt)
+        roast_text = markdown_to_html(roast_raw)
 
-        roast_text = response.text
-        roast_text = markdown_to_html(response.text)
+        # doc_ref = db.collection("roasts").add({
+        #     "resume_text": resume_text,
+        #     "prompt": prompt,
+        #     "roast": roast_text,
+        #     "timestamp": firestore.SERVER_TIMESTAMP
+        # })
 
-        doc_ref = db.collection("roasts").add({
-            "resume_text": resume_text,
-            "prompt": prompt,
-            "roast": roast_text,
-            "timestamp": firestore.SERVER_TIMESTAMP
-        })
 
     except Exception as e:
         roast_text = f"⚠️ Error generating roast: {e}"
@@ -174,9 +163,10 @@ import re
 
 
 def markdown_to_html(text):
-    # Convert *word* or *phrase* to <strong>word</strong>
-    return re.sub(r'\*(.*?)\*', r'<strong>\1</strong>', text)
-
+    import re
+    text = re.sub(r'\*(.*?)\*', r'<strong>\1</strong>', text)
+    paragraphs = [f"<p>{para.strip()}</p>" for para in text.split("\n\n")]
+    return "".join(paragraphs)
 
 # ========== Run App ==========
 
